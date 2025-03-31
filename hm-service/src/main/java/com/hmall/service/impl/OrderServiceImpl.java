@@ -26,11 +26,8 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * 服务实现类
+ * 服務實作類別
  * </p>
- *
- * @author 虎哥
- * @since 2023-05-05
  */
 @Service
 @RequiredArgsConstructor
@@ -43,44 +40,44 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     @Override
     @Transactional
     public Long createOrder(OrderFormDTO orderFormDTO) {
-        // 1.订单数据
+        // 1.訂單數據
         Order order = new Order();
-        // 1.1.查询商品
+        // 1.1.查詢商品
         List<OrderDetailDTO> detailDTOS = orderFormDTO.getDetails();
-        // 1.2.获取商品id和数量的Map
+        // 1.2.取得商品id和數量的Map
         Map<Long, Integer> itemNumMap = detailDTOS.stream()
                 .collect(Collectors.toMap(OrderDetailDTO::getItemId, OrderDetailDTO::getNum));
         Set<Long> itemIds = itemNumMap.keySet();
-        // 1.3.查询商品
+        // 1.3.查詢商品
         List<ItemDTO> items = itemService.queryItemByIds(itemIds);
         if (items == null || items.size() < itemIds.size()) {
             throw new BadRequestException("商品不存在");
         }
-        // 1.4.基于商品价格、购买数量计算商品总价：totalFee
+        // 1.4.基於商品價格、購買數量計算商品總價：totalFee
         int total = 0;
         for (ItemDTO item : items) {
             total += item.getPrice() * itemNumMap.get(item.getId());
         }
         order.setTotalFee(total);
-        // 1.5.其它属性
+        // 1.5.其它屬性
         order.setPaymentType(orderFormDTO.getPaymentType());
         order.setUserId(UserContext.getUser());
         order.setStatus(1);
-        // 1.6.将Order写入数据库order表中
+        // 1.6.將Order寫入資料庫order表中
         save(order);
 
-        // 2.保存订单详情
+        // 2.儲存訂單詳情
         List<OrderDetail> details = buildDetails(order.getId(), items, itemNumMap);
         detailService.saveBatch(details);
 
-        // 3.清理购物车商品
+        // 3.清理購物車商品
         cartService.removeByItemIds(itemIds);
 
-        // 4.扣减库存
+        // 4.扣減庫存
         try {
             itemService.deductStock(detailDTOS);
         } catch (Exception e) {
-            throw new RuntimeException("库存不足！");
+            throw new RuntimeException("庫存不足！");
         }
         return order.getId();
     }

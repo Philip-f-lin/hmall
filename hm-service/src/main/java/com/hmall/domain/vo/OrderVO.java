@@ -7,15 +7,15 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@ApiModel(description = "订单页面VO")
+@ApiModel(description = "訂單頁面VO")
 public class OrderVO {
-    @ApiModelProperty("订单id")
+    @ApiModelProperty("訂單id")
     private Long id;
-    @ApiModelProperty("总金额，单位为分")
+    @ApiModelProperty("總金額，單位為分")
     private Integer totalFee;
-    @ApiModelProperty("支付类型，1、支付宝，2、微信，3、扣减余额")
+    @ApiModelProperty("支付類型，1、支付寶，2、微信，3、扣減餘額")
     private Integer paymentType;
-    @ApiModelProperty("用户id")
+    @ApiModelProperty("使用者id")
     private Long userId;
     @ApiModelProperty("订单的状态，1、未付款 2、已付款,未发货 3、已发货,未确认 4、确认收货，交易成功 5、交易取消，订单关闭 6、交易结束，已评价")
     private Integer status;
