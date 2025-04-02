@@ -18,7 +18,7 @@ import java.util.Map;
 public class WebUtils {
 
     /**
-     * 获取ServletRequestAttributes
+     * 獲取ServletRequestAttributes
      *
      * @return ServletRequestAttributes
      */
@@ -31,7 +31,7 @@ public class WebUtils {
     }
 
     /**
-     * 获取request
+     * 獲取request
      *
      * @return HttpServletRequest
      */
@@ -41,7 +41,7 @@ public class WebUtils {
     }
 
     /**
-     * 获取response
+     * 獲取response
      *
      * @return HttpServletResponse
      */
@@ -51,10 +51,10 @@ public class WebUtils {
     }
 
     /**
-     * 获取request header中的内容
+     * 獲取request header中的內容
      *
-     * @param headerName 请求头名称
-     * @return 请求头的值
+     * @param headerName 請求頭名稱
+     * @return 請求頭的值
      */
     public static String getHeader(String headerName) {
         HttpServletRequest request = getRequest();
@@ -78,11 +78,11 @@ public class WebUtils {
     }
 
     /**
-     * 获取请求地址中的请求参数组装成 key1=value1&key2=value2
-     * 如果key对应多个值，中间使用逗号隔开例如 key1对应value1，key2对应value2，value3， key1=value1&key2=value2,value3
+     * 取得請求地址中的請求參數組裝成 key1=value1&key2=value2
+     * 如果key對應多個值，中間使用逗號隔開例如 key1對應value1，key2對應value2，value3， key1=value1&key2=value2,value3
      *
      * @param request
-     * @return 返回拼接字符串
+     * @return 傳回拼接字串
      */
     public static String getParameters(HttpServletRequest request) {
         Map<String, String[]> parameterMap = request.getParameterMap();
@@ -90,8 +90,8 @@ public class WebUtils {
     }
 
     /**
-     * 获取请求地址中的请求参数组装成 key1=value1&key2=value2
-     * 如果key对应多个值，中间使用逗号隔开例如 key1对应value1，key2对应value2，value3， key1=value1&key2=value2,value3
+     * 取得請求地址中的請求參數組裝成 key1=value1&key2=value2
+     * 如果key對應多個值，中間使用逗號分隔例如 key1對應value1，key2對應value2，value3， key1=value1&key2=value2,value3
      *
      * @param queries
      * @return
@@ -112,7 +112,7 @@ public class WebUtils {
     }
 
     /**
-     * 获取请求url中的uri
+     * 獲取請求url中的uri
      *
      * @param url
      * @return
@@ -130,7 +130,7 @@ public class WebUtils {
             uri = uri.replace("https://", StrUtil.EMPTY);
         }
 
-        int endIndex = uri.length(); //uri 在url中的最后一个字符的序号+1
+        int endIndex = uri.length(); //uri 在url中的最後一個字元的序號+1
         if(uri.contains("?")){
             endIndex = uri.indexOf("?");
         }
