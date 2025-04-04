@@ -13,11 +13,8 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 用户表
+ * 使用者表
  * </p>
- *
- * @author 虎哥
- * @since 2023-05-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,34 +28,34 @@ public class User implements Serializable {
     private Long id;
 
     /**
-     * 用户名
+     * 使用者名稱
      */
     private String username;
 
     /**
-     * 密码，加密存储
+     * 密碼，加密存儲
      */
     private String password;
 
     /**
-     * 注册手机号
+     * 註冊手機號碼
      */
     private String phone;
 
     /**
-     * 创建时间
+     * 創建時間
      */
     private LocalDateTime createTime;
 
     private LocalDateTime updateTime;
 
     /**
-     * 使用状态（1正常 2冻结）
+     * 使用狀態（1正常 2凍結）
      */
     private UserStatus status;
 
     /**
-     * 账户余额
+     * 帳戶餘額
      */
     private Integer balance;
 

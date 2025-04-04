@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public enum PayType{
-    JSAPI(1, "网页支付JS"),
-    MINI_APP(2, "小程序支付"),
+    JSAPI(1, "網頁支付JS"),
+    MINI_APP(2, "小程式支付"),
     APP(3, "APP支付"),
-    NATIVE(4, "扫码支付"),
-    BALANCE(5, "余额支付"),
+    NATIVE(4, "掃碼支付"),
+    BALANCE(5, "餘額支付"),
     ;
     private final int value;
     private final String desc;

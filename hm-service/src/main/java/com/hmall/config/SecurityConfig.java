@@ -20,12 +20,12 @@ public class SecurityConfig {
 
     @Bean
     public KeyPair keyPair(JwtProperties properties){
-        // 获取秘钥工厂
+        // 取得秘鑰工廠
         KeyStoreKeyFactory keyStoreKeyFactory =
                 new KeyStoreKeyFactory(
                         properties.getLocation(),
                         properties.getPassword().toCharArray());
-        //读取钥匙对
+        //讀取鑰匙對
         return keyStoreKeyFactory.getKeyPair(
                 properties.getAlias(),
                 properties.getPassword().toCharArray());

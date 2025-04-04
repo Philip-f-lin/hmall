@@ -6,19 +6,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 继承自 hutool 的BeanUtil，增加了bean转换时自定义转换器的功能
+ * 繼承自 hutool 的BeanUtil，增加了bean轉換時自訂轉換器的功能
  */
 public class BeanUtils extends BeanUtil {
 
     /**
-     * 将原对象转换成目标对象，对于字段不匹配的字段可以使用转换器处理
+     * 將原始對象轉換成目標對象，對於欄位不匹配的欄位可以使用轉換器處理
      *
-     * @param source  原对象
-     * @param clazz   目标对象的class
-     * @param convert 转换器
-     * @param <R>     原对象类型
-     * @param <T>     目标对象类型
-     * @return 目标对象
+     * @param source  原對象
+     * @param clazz   目標物件的class
+     * @param convert 轉換器
+     * @param <R>     原物件類型
+     * @param <T>     目標物件類型
+     * @return 目標對象
      */
     public static <R, T> T copyBean(R source, Class<T> clazz, Convert<R, T> convert) {
         T target = copyBean(source, clazz);
@@ -28,13 +28,13 @@ public class BeanUtils extends BeanUtil {
         return target;
     }
     /**
-     * 将原对象转换成目标对象，对于字段不匹配的字段可以使用转换器处理
+     * 將原始對象轉換成目標對象，對於欄位不匹配的欄位可以使用轉換器處理
      *
-     * @param source  原对象
-     * @param clazz   目标对象的class
-     * @param <R>     原对象类型
-     * @param <T>     目标对象类型
-     * @return 目标对象
+     * @param source  原對象
+     * @param clazz   目標物件的class
+     * @param <R>     原物件類型
+     * @param <T>     目標物件類型
+     * @return 目標對象
      */
     public static <R, T> T copyBean(R source, Class<T> clazz){
         if (source == null) {

@@ -23,11 +23,8 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 支付订单 服务实现类
+ * 支付訂單 服務實現類
  * </p>
- *
- * @author 虎哥
- * @since 2023-05-16
  */
 @Service
 @RequiredArgsConstructor
@@ -39,30 +36,30 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
 
     @Override
     public String applyPayOrder(PayApplyDTO applyDTO) {
-        // 1.幂等性校验
+        // 1.冪等性校驗
         PayOrder payOrder = checkIdempotent(applyDTO);
-        // 2.返回结果
+        // 2.回傳結果
         return payOrder.getId().toString();
     }
 
     @Override
     @Transactional
     public void tryPayOrderByBalance(PayOrderFormDTO payOrderFormDTO) {
-        // 1.查询支付单
+        // 1.查詢支付單
         PayOrder po = getById(payOrderFormDTO.getId());
-        // 2.判断状态
+        // 2.判斷狀態
         if(!PayStatus.WAIT_BUYER_PAY.equalsValue(po.getStatus())){
-            // 订单不是未支付，状态异常
-            throw new BizIllegalException("交易已支付或关闭！");
+            // 訂單不是未支付，狀態異常
+            throw new BizIllegalException("交易已支付或關閉！");
         }
-        // 3.尝试扣减余额
+        // 3.嘗試扣減餘額
         userService.deductMoney(payOrderFormDTO.getPw(), po.getAmount());
-        // 4.修改支付单状态
+        // 4.修改支付單狀態
         boolean success = markPayOrderSuccess(payOrderFormDTO.getId(), LocalDateTime.now());
         if (!success) {
-            throw new BizIllegalException("交易已支付或关闭！");
+            throw new BizIllegalException("交易已支付或關閉！");
         }
-        // 5.修改订单状态
+        // 5.修改訂單狀態
         Order order = new Order();
         order.setId(po.getBizOrderNo());
         order.setStatus(2);
@@ -75,36 +72,36 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
                 .set(PayOrder::getStatus, PayStatus.TRADE_SUCCESS.getValue())
                 .set(PayOrder::getPaySuccessTime, successTime)
                 .eq(PayOrder::getId, id)
-                // 支付状态的乐观锁判断
+                // 支付狀態的樂觀鎖判斷
                 .in(PayOrder::getStatus, PayStatus.NOT_COMMIT.getValue(), PayStatus.WAIT_BUYER_PAY.getValue())
                 .update();
     }
 
 
     private PayOrder checkIdempotent(PayApplyDTO applyDTO) {
-        // 1.首先查询支付单
+        // 1.首先查詢支付單
         PayOrder oldOrder = queryByBizOrderNo(applyDTO.getBizOrderNo());
-        // 2.判断是否存在
+        // 2.判斷是否存在
         if (oldOrder == null) {
-            // 不存在支付单，说明是第一次，写入新的支付单并返回
+            // 不存在支付單，說明是第一次，寫入新的支付單並返回
             PayOrder payOrder = buildPayOrder(applyDTO);
             payOrder.setPayOrderNo(IdWorker.getId());
             save(payOrder);
             return payOrder;
         }
-        // 3.旧单已经存在，判断是否支付成功
+        // 3.舊單已經存在，判斷是否支付成功
         if (PayStatus.TRADE_SUCCESS.equalsValue(oldOrder.getStatus())) {
-            // 已经支付成功，抛出异常
-            throw new BizIllegalException("订单已经支付！");
+            // 已經支付成功，拋出異常
+            throw new BizIllegalException("訂單已經支付！");
         }
-        // 4.旧单已经存在，判断是否已经关闭
+        // 4.舊單已經存在，判斷是否已關閉
         if (PayStatus.TRADE_CLOSED.equalsValue(oldOrder.getStatus())) {
-            // 已经关闭，抛出异常
-            throw new BizIllegalException("订单已关闭");
+            // 已經關閉，拋出例外
+            throw new BizIllegalException("訂單已關閉");
         }
-        // 5.旧单已经存在，判断支付渠道是否一致
+        // 5.舊單已經存在，判斷支付管道是否一致
         if (!StringUtils.equals(oldOrder.getPayChannelCode(), applyDTO.getPayChannelCode())) {
-            // 支付渠道不一致，需要重置数据，然后重新申请支付单
+            // 支付管道不一致，需要重置數據，然後重新申請支付單
             PayOrder payOrder = buildPayOrder(applyDTO);
             payOrder.setId(oldOrder.getId());
             payOrder.setQrCodeUrl("");
@@ -112,14 +109,14 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
             payOrder.setPayOrderNo(oldOrder.getPayOrderNo());
             return payOrder;
         }
-        // 6.旧单已经存在，且可能是未支付或未提交，且支付渠道一致，直接返回旧数据
+        // 6.舊單已經存在，且可能是未支付或未提交，且支付管道一致，直接返回舊數據
         return oldOrder;
     }
 
     private PayOrder buildPayOrder(PayApplyDTO payApplyDTO) {
-        // 1.数据转换
+        // 1.資料轉換
         PayOrder payOrder = BeanUtils.toBean(payApplyDTO, PayOrder.class);
-        // 2.初始化数据
+        // 2.初始化數據
         payOrder.setPayOverTime(LocalDateTime.now().plusMinutes(120L));
         payOrder.setStatus(PayStatus.WAIT_BUYER_PAY.getValue());
         payOrder.setBizUserId(UserContext.getUser());

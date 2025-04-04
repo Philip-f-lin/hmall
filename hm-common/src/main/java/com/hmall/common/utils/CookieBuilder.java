@@ -33,7 +33,7 @@ public class CookieBuilder {
     }
 
     /**
-     * 构建cookie，会对cookie值用UTF-8做URL编码，避免中文乱码
+     * 建構cookie，會對cookie值用UTF-8做URL編碼，避免中文亂碼
      */
     public void build(){
         if (response == null) {
@@ -51,15 +51,15 @@ public class CookieBuilder {
         cookie.setHttpOnly(httpOnly);
         cookie.setMaxAge(maxAge);
         cookie.setPath(path);
-        log.debug("生成cookie，编码方式:{}，【{}={}，domain:{};maxAge={};path={};httpOnly={}】",
+        log.debug("產生cookie，編碼方式:{}，【{}={}，domain:{};maxAge={};path={};httpOnly={}】",
                 charset.name(), name, value, domain, maxAge, path, httpOnly);
         response.addCookie(cookie);
     }
 
     /**
-     * 利用UTF-8对cookie值解码，避免中文乱码问题
+     * 利用UTF-8對cookie值解碼，避免中文亂碼問題
      * @param cookieValue cookie原始值
-     * @return 解码后的值
+     * @return 解碼後的值
      */
     public String decode(String cookieValue){
         return URLDecoder.decode(cookieValue, charset);

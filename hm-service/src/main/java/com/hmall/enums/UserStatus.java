@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public enum UserStatus {
     FROZEN(0, "禁止使用"),
-    NORMAL(1, "已激活"),
+    NORMAL(1, "已啟用"),
     ;
     @EnumValue
     int value;
@@ -25,6 +25,6 @@ public enum UserStatus {
         if (value == 1) {
             return NORMAL;
         }
-        throw new BadRequestException("账户状态错误");
+        throw new BadRequestException("帳戶狀態錯誤");
     }
 }

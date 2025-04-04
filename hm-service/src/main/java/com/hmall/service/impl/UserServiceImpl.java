@@ -21,10 +21,8 @@ import org.springframework.util.Assert;
 
 /**
  * <p>
- * 用户表 服务实现类
+ * 使用者表 服務實作類別
  * </p>
- *
- * @author 虎哥
  */
 @Slf4j
 @Service
@@ -39,23 +37,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public UserLoginVO login(LoginFormDTO loginDTO) {
-        // 1.数据校验
+        // 1.資料校驗
         String username = loginDTO.getUsername();
         String password = loginDTO.getPassword();
-        // 2.根据用户名或手机号查询
+        // 2.依使用者名稱或手機號碼查詢
         User user = lambdaQuery().eq(User::getUsername, username).one();
-        Assert.notNull(user, "用户名错误");
-        // 3.校验是否禁用
+        Assert.notNull(user, "使用者名稱錯誤");
+        // 3.校驗是否停用
         if (user.getStatus() == UserStatus.FROZEN) {
-            throw new ForbiddenException("用户被冻结");
+            throw new ForbiddenException("用戶被凍結");
         }
-        // 4.校验密码
+        // 4.校驗密碼
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new BadRequestException("用户名或密码错误");
+            throw new BadRequestException("使用者名稱或密碼錯誤");
         }
-        // 5.生成TOKEN
+        // 5.生成 TOKEN
         String token = jwtTool.createToken(user.getId(), jwtProperties.getTokenTTL());
-        // 6.封装VO返回
+        // 6.封裝 VO 返回
         UserLoginVO vo = new UserLoginVO();
         vo.setUserId(user.getId());
         vo.setUsername(user.getUsername());
@@ -66,19 +64,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public void deductMoney(String pw, Integer totalFee) {
-        log.info("开始扣款");
-        // 1.校验密码
+        log.info("開始扣款");
+        // 1.校驗密碼
         User user = getById(UserContext.getUser());
         if(user == null || !passwordEncoder.matches(pw, user.getPassword())){
-            // 密码错误
-            throw new BizIllegalException("用户密码错误");
+            // 密碼錯誤
+            throw new BizIllegalException("使用者密碼錯誤");
         }
 
-        // 2.尝试扣款
+        // 2.試試扣款
         try {
             baseMapper.updateMoney(UserContext.getUser(), totalFee);
         } catch (Exception e) {
-            throw new RuntimeException("扣款失败，可能是余额不足！", e);
+            throw new RuntimeException("扣款失敗，可能是餘額不足！", e);
         }
         log.info("扣款成功");
     }

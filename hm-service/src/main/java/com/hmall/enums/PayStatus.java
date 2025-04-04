@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum PayStatus {
     NOT_COMMIT(0, "未提交"),
     WAIT_BUYER_PAY(1, "待支付"),
-    TRADE_CLOSED(2, "已关闭"),
+    TRADE_CLOSED(2, "已關閉"),
     TRADE_SUCCESS(3, "支付成功"),
     TRADE_FINISHED(3, "支付成功"),
     ;

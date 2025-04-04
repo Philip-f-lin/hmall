@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@ApiModel(description = "收货地址实体")
+@ApiModel(description = "收貨地址實體")
 public class AddressDTO {
     @ApiModelProperty("id")
     private Long id;
@@ -13,16 +13,16 @@ public class AddressDTO {
     private String province;
     @ApiModelProperty("市")
     private String city;
-    @ApiModelProperty("县/区")
+    @ApiModelProperty("縣/區")
     private String town;
-    @ApiModelProperty("手机")
+    @ApiModelProperty("手機")
     private String mobile;
-    @ApiModelProperty("详细地址")
+    @ApiModelProperty("詳細地址")
     private String street;
-    @ApiModelProperty("联系人")
+    @ApiModelProperty("聯絡人")
     private String contact;
-    @ApiModelProperty("是否是默认 1默认 0否")
+    @ApiModelProperty("是否為預設 1預設 0否")
     private Integer isDefault;
-    @ApiModelProperty("备注")
+    @ApiModelProperty("備註")
     private String notes;
 }

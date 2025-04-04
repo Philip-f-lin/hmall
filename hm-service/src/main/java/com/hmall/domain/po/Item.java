@@ -15,9 +15,6 @@ import java.time.LocalDateTime;
  * <p>
  * 商品表
  * </p>
- *
- * @author 虎哥
- * @since 2023-05-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -34,73 +31,73 @@ public class Item implements Serializable {
     private Long id;
 
     /**
-     * SKU名称
+     * SKU名稱
      */
     private String name;
 
     /**
-     * 价格（分）
+     * 價格（分）
      */
     private Integer price;
 
     /**
-     * 库存数量
+     * 庫存數量
      */
     private Integer stock;
 
     /**
-     * 商品图片
+     * 商品圖片
      */
     private String image;
 
     /**
-     * 类目名称
+     * 類別目名稱
      */
     private String category;
 
     /**
-     * 品牌名称
+     * 品牌名稱
      */
     private String brand;
 
     /**
-     * 规格
+     * 規格
      */
     private String spec;
 
     /**
-     * 销量
+     * 銷量
      */
     private Integer sold;
 
     /**
-     * 评论数
+     * 評論數
      */
     private Integer commentCount;
 
     /**
-     * 是否是推广广告，true/false
+     * 是否為推廣廣告，true/false
      */
     @TableField("isAD")
     private Boolean isAD;
 
     /**
-     * 商品状态 1-正常，2-下架，3-删除
+     * 商品狀態 1-正常，2-下架，3-刪除
      */
     private Integer status;
 
     /**
-     * 创建时间
+     * 創建時間
      */
     private LocalDateTime createTime;
 
     /**
-     * 更新时间
+     * 更新時間
      */
     private LocalDateTime updateTime;
 
     /**
-     * 创建人
+     * 創建人
      */
     private Long creater;
 

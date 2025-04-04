@@ -19,43 +19,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * <p>
- *  前端控制器
- * </p>
- *
- * @author 虎哥
- */
 @RestController
 @RequestMapping("/addresses")
 @RequiredArgsConstructor
-@Api(tags = "收货地址管理接口")
+@Api(tags = "收貨地址管理接口")
 public class AddressController {
 
     private final IAddressService addressService;
 
-    @ApiOperation("根据id查询地址")
+    @ApiOperation("根據id查詢地址")
     @GetMapping("{addressId}")
     public AddressDTO findAddressById(@ApiParam("地址id") @PathVariable("addressId") Long id) {
-        // 1.根据id查询
+        // 1.根據id查詢
         Address address = addressService.getById(id);
-        // 2.判断当前用户
+        // 2.判斷當前用戶
         Long userId = UserContext.getUser();
         if(!address.getUserId().equals(userId)){
-            throw new BadRequestException("地址不属于当前登录用户");
+            throw new BadRequestException("地址不屬於目前登入用戶");
         }
         return BeanUtils.copyBean(address, AddressDTO.class);
     }
-    @ApiOperation("查询当前用户地址列表")
+    @ApiOperation("查詢目前使用者地址列表")
     @GetMapping
     public List<AddressDTO> findMyAddresses() {
-        // 1.查询列表
+        // 1.查詢列表
         List<Address> list = addressService.query().eq("user_id", UserContext.getUser()).list();
         // 2.判空
         if (CollUtils.isEmpty(list)) {
             return CollUtils.emptyList();
         }
-        // 3.转vo
+        // 3.轉vo
         return BeanUtils.copyList(list, AddressDTO.class);
     }
 }

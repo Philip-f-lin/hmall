@@ -14,9 +14,6 @@ import java.time.LocalDateTime;
  * <p>
  * 
  * </p>
- *
- * @author 虎哥
- * @since 2023-05-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -27,28 +24,28 @@ public class OrderLogistics implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 订单id，与订单表一对一
+     * 訂單id，與訂單表一對一
      */
     @TableId(value = "order_id", type = IdType.INPUT)
     private Long orderId;
 
     /**
-     * 物流单号
+     * 物流單號
      */
     private String logisticsNumber;
 
     /**
-     * 物流公司名称
+     * 物流公司名稱
      */
     private String logisticsCompany;
 
     /**
-     * 收件人
+     * 收件者
      */
     private String contact;
 
     /**
-     * 收件人手机号码
+     * 收件者手機號碼
      */
     private String mobile;
 
@@ -63,7 +60,7 @@ public class OrderLogistics implements Serializable {
     private String city;
 
     /**
-     * 区
+     * 區
      */
     private String town;
 
@@ -73,12 +70,12 @@ public class OrderLogistics implements Serializable {
     private String street;
 
     /**
-     * 创建时间
+     * 創建時間
      */
     private LocalDateTime createTime;
 
     /**
-     * 更新时间
+     * 更新時間
      */
     private LocalDateTime updateTime;
 

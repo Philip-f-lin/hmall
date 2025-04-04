@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = "搜索相关接口")
+@Api(tags = "搜尋相關介面")
 @RestController
 @RequestMapping("/search")
 @RequiredArgsConstructor
@@ -23,10 +23,10 @@ public class SearchController {
 
     private final IItemService itemService;
 
-    @ApiOperation("搜索商品")
+    @ApiOperation("搜尋商品")
     @GetMapping("/list")
     public PageDTO<ItemDTO> search(ItemPageQuery query) {
-        // 分页查询
+        // 分頁查詢
         Page<Item> result = itemService.lambdaQuery()
                 .like(StrUtil.isNotBlank(query.getKey()), Item::getName, query.getKey())
                 .eq(StrUtil.isNotBlank(query.getBrand()), Item::getBrand, query.getBrand())
@@ -34,7 +34,7 @@ public class SearchController {
                 .eq(Item::getStatus, 1)
                 .between(query.getMaxPrice() != null, Item::getPrice, query.getMinPrice(), query.getMaxPrice())
                 .page(query.toMpPage("update_time", false));
-        // 封装并返回
+        // 封裝並返回
         return PageDTO.of(result, ItemDTO.class);
     }
 }

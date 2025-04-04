@@ -10,21 +10,21 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
-@ApiModel(description = "支付下单表单实体")
+@ApiModel(description = "支付下單表單實體")
 public class PayApplyDTO {
-    @ApiModelProperty("业务订单id不能为空")
-    @NotNull(message = "业务订单id不能为空")
+    @ApiModelProperty("業務訂單id不能為空")
+    @NotNull(message = "業務訂單id不能為空")
     private Long bizOrderNo;
-    @ApiModelProperty("支付金额必须为正数")
-    @Min(value = 1, message = "支付金额必须为正数")
+    @ApiModelProperty("支付金額必須為正數")
+    @Min(value = 1, message = "支付金額必須為正數")
     private Integer amount;
-    @ApiModelProperty("支付渠道编码不能为空")
-    @NotNull(message = "支付渠道编码不能为空")
+    @ApiModelProperty("支付管道編碼不能為空")
+    @NotNull(message = "支付管道編碼不能為空")
     private String payChannelCode;
-    @ApiModelProperty("支付方式不能为空")
-    @NotNull(message = "支付方式不能为空")
+    @ApiModelProperty("付款方式不能為空")
+    @NotNull(message = "付款方式不能為空")
     private Integer payType;
-    @ApiModelProperty("订单中的商品信息不能为空")
-    @NotNull(message = "订单中的商品信息不能为空")
+    @ApiModelProperty("訂單中的商品資訊不能為空")
+    @NotNull(message = "訂單中的商品資訊不能為空")
     private String orderInfo;
 }

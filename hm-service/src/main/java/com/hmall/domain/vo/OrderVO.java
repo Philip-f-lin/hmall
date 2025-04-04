@@ -17,18 +17,18 @@ public class OrderVO {
     private Integer paymentType;
     @ApiModelProperty("使用者id")
     private Long userId;
-    @ApiModelProperty("订单的状态，1、未付款 2、已付款,未发货 3、已发货,未确认 4、确认收货，交易成功 5、交易取消，订单关闭 6、交易结束，已评价")
+    @ApiModelProperty("訂單的狀態，1、未付款 2、已付款,未發貨 3、已發貨,未確認 4、確認收貨，交易成功 5、交易取消，訂單關閉 6、交易結束，已評價")
     private Integer status;
-    @ApiModelProperty("创建时间")
+    @ApiModelProperty("創建時間")
     private LocalDateTime createTime;
-    @ApiModelProperty("支付时间")
+    @ApiModelProperty("支付時間")
     private LocalDateTime payTime;
-    @ApiModelProperty("发货时间")
+    @ApiModelProperty("出貨時間")
     private LocalDateTime consignTime;
-    @ApiModelProperty("交易完成时间")
+    @ApiModelProperty("交易完成時間")
     private LocalDateTime endTime;
-    @ApiModelProperty("交易关闭时间")
+    @ApiModelProperty("交易關閉時間")
     private LocalDateTime closeTime;
-    @ApiModelProperty("评价时间")
+    @ApiModelProperty("評價時間")
     private LocalDateTime commentTime;
 }

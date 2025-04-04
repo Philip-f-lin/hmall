@@ -26,13 +26,13 @@ public class Cart implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 购物车条目id 
+     * 購物車條目id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
-     * 用户id
+     * 使用者id
      */
     private Long userId;
 
@@ -42,37 +42,37 @@ public class Cart implements Serializable {
     private Long itemId;
 
     /**
-     * 购买数量
+     * 購買數量
      */
     private Integer num;
 
     /**
-     * 商品标题
+     * 商品標題
      */
     private String name;
 
     /**
-     * 商品动态属性键值集
+     * 商品動態屬性鍵值集
      */
     private String spec;
 
     /**
-     * 价格,单位：分
+     * 價格,單位：分
      */
     private Integer price;
 
     /**
-     * 商品图片
+     * 商品圖片
      */
     private String image;
 
     /**
-     * 创建时间
+     * 創建時間
      */
     private LocalDateTime createTime;
 
     /**
-     * 更新时间
+     * 更新時間
      */
     private LocalDateTime updateTime;
 

@@ -11,27 +11,27 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = "订单管理接口")
+@Api(tags = "訂單管理介面")
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
 public class OrderController {
     private final IOrderService orderService;
 
-    @ApiOperation("根据id查询订单")
+    @ApiOperation("根據id查詢訂單")
     @GetMapping("{id}")
-    public OrderVO queryOrderById(@Param ("订单id")@PathVariable("id") Long orderId) {
+    public OrderVO queryOrderById(@Param ("訂單id")@PathVariable("id") Long orderId) {
         return BeanUtils.copyBean(orderService.getById(orderId), OrderVO.class);
     }
 
-    @ApiOperation("创建订单")
+    @ApiOperation("建立訂單")
     @PostMapping
     public Long createOrder(@RequestBody OrderFormDTO orderFormDTO){
         return orderService.createOrder(orderFormDTO);
     }
 
-    @ApiOperation("标记订单已支付")
-    @ApiImplicitParam(name = "orderId", value = "订单id", paramType = "path")
+    @ApiOperation("標記訂單已支付")
+    @ApiImplicitParam(name = "orderId", value = "訂單id", paramType = "path")
     @PutMapping("/{orderId}")
     public void markOrderPaySuccess(@PathVariable("orderId") Long orderId) {
         orderService.markOrderPaySuccess(orderId);

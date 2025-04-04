@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(tags = "商品管理相关接口")
+@Api(tags = "商品管理相關介面")
 @RestController
 @RequestMapping("/items")
 @RequiredArgsConstructor
@@ -24,22 +24,22 @@ public class ItemController {
 
     private final IItemService itemService;
 
-    @ApiOperation("分页查询商品")
+    @ApiOperation("分頁查詢商品")
     @GetMapping("/page")
     public PageDTO<ItemDTO> queryItemByPage(PageQuery query) {
-        // 1.分页查询
+        // 1.分頁查詢
         Page<Item> result = itemService.page(query.toMpPage("update_time", false));
-        // 2.封装并返回
+        // 2.封裝並返回
         return PageDTO.of(result, ItemDTO.class);
     }
 
-    @ApiOperation("根据id批量查询商品")
+    @ApiOperation("根據id批量查詢商品")
     @GetMapping
     public List<ItemDTO> queryItemByIds(@RequestParam("ids") List<Long> ids){
         return itemService.queryItemByIds(ids);
     }
 
-    @ApiOperation("根据id查询商品")
+    @ApiOperation("根據id查詢商品")
     @GetMapping("{id}")
     public ItemDTO queryItemById(@PathVariable("id") Long id) {
         return BeanUtils.copyBean(itemService.getById(id), ItemDTO.class);
@@ -52,7 +52,7 @@ public class ItemController {
         itemService.save(BeanUtils.copyBean(item, Item.class));
     }
 
-    @ApiOperation("更新商品状态")
+    @ApiOperation("更新商品狀態")
     @PutMapping("/status/{id}/{status}")
     public void updateItemStatus(@PathVariable("id") Long id, @PathVariable("status") Integer status){
         Item item = new Item();
@@ -64,19 +64,19 @@ public class ItemController {
     @ApiOperation("更新商品")
     @PutMapping
     public void updateItem(@RequestBody ItemDTO item) {
-        // 不允许修改商品状态，所以强制设置为null，更新时，就会忽略该字段
+        // 不允許修改商品狀態，所以強制設定為null，更新時，就會忽略該字段
         item.setStatus(null);
         // 更新
         itemService.updateById(BeanUtils.copyBean(item, Item.class));
     }
 
-    @ApiOperation("根据id删除商品")
+    @ApiOperation("根據id刪除商品")
     @DeleteMapping("{id}")
     public void deleteItemById(@PathVariable("id") Long id) {
         itemService.removeById(id);
     }
 
-    @ApiOperation("批量扣减库存")
+    @ApiOperation("批量扣減庫存")
     @PutMapping("/stock/deduct")
     public void deductStock(@RequestBody List<OrderDetailDTO> items){
         itemService.deductStock(items);

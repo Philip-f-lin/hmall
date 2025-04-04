@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = "用户相关接口")
+@Api(tags = "使用者相關介面")
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -19,16 +19,16 @@ public class UserController {
 
     private final IUserService userService;
 
-    @ApiOperation("用户登录接口")
+    @ApiOperation("使用者登入介面")
     @PostMapping("login")
     public UserLoginVO login(@RequestBody @Validated LoginFormDTO loginFormDTO){
         return userService.login(loginFormDTO);
     }
 
-    @ApiOperation("扣减余额")
+    @ApiOperation("扣減餘額")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pw", value = "支付密码"),
-            @ApiImplicitParam(name = "amount", value = "支付金额")
+            @ApiImplicitParam(name = "pw", value = "支付密碼"),
+            @ApiImplicitParam(name = "amount", value = "支付金額")
     })
     @PutMapping("/money/deduct")
     public void deductMoney(@RequestParam("pw") String pw,@RequestParam("amount") Integer amount){

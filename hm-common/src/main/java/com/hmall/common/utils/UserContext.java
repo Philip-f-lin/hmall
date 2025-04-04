@@ -4,23 +4,23 @@ public class UserContext {
     private static final ThreadLocal<Long> tl = new ThreadLocal<>();
 
     /**
-     * 保存当前登录用户信息到ThreadLocal
-     * @param userId 用户id
+     * 儲存目前登入使用者資訊到ThreadLocal
+     * @param userId 使用者id
      */
     public static void setUser(Long userId) {
         tl.set(userId);
     }
 
     /**
-     * 获取当前登录用户信息
-     * @return 用户id
+     * 取得目前登入使用者資訊
+     * @return 使用者id
      */
     public static Long getUser() {
         return tl.get();
     }
 
     /**
-     * 移除当前登录用户信息
+     * 移除目前登入使用者訊息
      */
     public static void removeUser(){
         tl.remove();

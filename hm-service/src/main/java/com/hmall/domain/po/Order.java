@@ -14,9 +14,6 @@ import java.time.LocalDateTime;
  * <p>
  * 
  * </p>
- *
- * @author 虎哥
- * @since 2023-05-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -27,63 +24,63 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 订单id
+     * 訂單id
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
-     * 总金额，单位为分
+     * 總金額，單位為分
      */
     private Integer totalFee;
 
     /**
-     * 支付类型，1、支付宝，2、微信，3、扣减余额
+     * 支付類型，1、支付寶，2、微信，3、扣減餘額
      */
     private Integer paymentType;
 
     /**
-     * 用户id
+     * 使用者id
      */
     private Long userId;
 
     /**
-     * 订单的状态，1、未付款 2、已付款,未发货 3、已发货,未确认 4、确认收货，交易成功 5、交易取消，订单关闭 6、交易结束，已评价
+     * 訂單的狀態，1、未付款 2、已付款,未發貨 3、已發貨,未確認 4、確認收貨，交易成功 5、交易取消，訂單關閉 6、交易結束，已評價
      */
     private Integer status;
 
     /**
-     * 创建时间
+     * 創建時間
      */
     private LocalDateTime createTime;
 
     /**
-     * 支付时间
+     * 支付時間
      */
     private LocalDateTime payTime;
 
     /**
-     * 发货时间
+     * 出貨時間
      */
     private LocalDateTime consignTime;
 
     /**
-     * 交易完成时间
+     * 交易完成時間
      */
     private LocalDateTime endTime;
 
     /**
-     * 交易关闭时间
+     * 交易關閉時間
      */
     private LocalDateTime closeTime;
 
     /**
-     * 评价时间
+     * 評價時間
      */
     private LocalDateTime commentTime;
 
     /**
-     * 更新时间
+     * 更新時間
      */
     private LocalDateTime updateTime;
 

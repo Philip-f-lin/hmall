@@ -13,9 +13,6 @@ import java.io.Serializable;
  * <p>
  * 
  * </p>
- *
- * @author 虎哥
- * @since 2023-05-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -29,7 +26,7 @@ public class Address implements Serializable {
     private Long id;
 
     /**
-     * 用户ID
+     * 使用者ID
      */
     private Long userId;
 
@@ -44,32 +41,32 @@ public class Address implements Serializable {
     private String city;
 
     /**
-     * 县/区
+     * 縣/區
      */
     private String town;
 
     /**
-     * 手机
+     * 手機
      */
     private String mobile;
 
     /**
-     * 详细地址
+     * 詳細地址
      */
     private String street;
 
     /**
-     * 联系人
+     * 聯絡人
      */
     private String contact;
 
     /**
-     * 是否是默认 1默认 0否
+     * 是否為預設 1預設 0否
      */
     private Integer isDefault;
 
     /**
-     * 备注
+     * 備註
      */
     private String notes;
 

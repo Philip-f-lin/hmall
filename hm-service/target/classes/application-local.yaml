@@ -1,4 +1,4 @@
 hm:
   db:
-    host: 192.168.2.132 # 修改为你自己的虚拟机IP地址
-    pw: 123 # 修改为docker中的MySQL密码
+    host: 192.168.2.132 # 修改為自己的虛擬機器IP位址
+    pw: 123 # 修改為docker中的MySQL密碼
