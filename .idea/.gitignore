@@ -6,3 +6,31 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+*.gz
+
+# Package Files #
+*.jar
+*.war
+*.ear
+target/
+
+# idea
+.idea/
+*.iml
+
+### STS ###
+.apt_generated
+.factorypath
+.springBeans
+
+### Intelli] IDEA ###
+*.iml
+*.ipr
+*.iws
+.idea
+.Classpath
+.project
+.settings/
+bin/
+
+
