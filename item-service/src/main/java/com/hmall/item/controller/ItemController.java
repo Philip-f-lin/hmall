@@ -26,7 +26,8 @@ public class ItemController {
 
     @ApiOperation("分頁查詢商品")
     @GetMapping("/page")
-    public PageDTO<ItemDTO> queryItemByPage(PageQuery query) {
+    public PageDTO<ItemDTO> queryItemByPage(PageQuery query, @RequestHeader(value = "truth", required = false) String truth) {
+        System.out.println("truth = " + truth);
         // 1.分頁查詢
         Page<Item> result = itemService.page(query.toMpPage("update_time", false));
         // 2.封裝並返回

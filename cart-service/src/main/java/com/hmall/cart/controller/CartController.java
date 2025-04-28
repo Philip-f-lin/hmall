@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Api(tags = "購物車相關介面")
 @RestController
@@ -42,13 +43,14 @@ public class CartController {
 
     @ApiOperation("查詢購物車列表")
     @GetMapping
-    public List<CartVO> queryMyCarts(){
+    public List<CartVO> queryMyCarts(@RequestHeader(value = "user-info", required = false)String userInfo){
+        System.out.println("user-info = " + userInfo);
         return cartService.queryMyCarts();
     }
     @ApiOperation("批量刪除購物車中商品")
     @ApiImplicitParam(name = "ids", value = "購物車條目id集合")
     @DeleteMapping
-    public void deleteCartItemByIds(@RequestParam("ids") List<Long> ids){
+    public void deleteCartItemByIds(@RequestParam("ids") Set<Long> ids){
         cartService.removeByItemIds(ids);
     }
 }
