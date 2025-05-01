@@ -50,7 +50,7 @@ public class CartController {
     @ApiOperation("批量刪除購物車中商品")
     @ApiImplicitParam(name = "ids", value = "購物車條目id集合")
     @DeleteMapping
-    public void deleteCartItemByIds(@RequestParam("ids") Set<Long> ids){
+    public void deleteCartItemByIds(@RequestParam("ids") List<Long> ids){
         cartService.removeByItemIds(ids);
     }
 }
