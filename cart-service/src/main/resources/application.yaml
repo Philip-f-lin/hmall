@@ -9,3 +9,9 @@ hm:
   swagger:
     title: "黑馬商城購物車服務接口文檔"
     package: com.hmall.cart.controller
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8090 # sentinel 的控制台地址
+      http-method-specify: true # 是否設置請求方式作為資源名稱
